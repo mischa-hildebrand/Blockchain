@@ -12,6 +12,7 @@
 		A1356E50200B879B0050CE89 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E4F200B879B0050CE89 /* Transaction.swift */; };
 		A1356E52200B9C970050CE89 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E51200B9C970050CE89 /* Wallet.swift */; };
 		A1356E54200BA6290050CE89 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E53200BA6290050CE89 /* Cryptography.swift */; };
+		A1356E5C200BDE2C0050CE89 /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E5B200BDE2C0050CE89 /* DataConvertible.swift */; };
 		A1AC1496200A36C500912E0E /* Blockchain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1AC148C200A36C500912E0E /* Blockchain.framework */; };
 		A1AC149B200A36C500912E0E /* BlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AC149A200A36C500912E0E /* BlockchainTests.swift */; };
 		A1AC149D200A36C500912E0E /* Blockchain.h in Headers */ = {isa = PBXBuildFile; fileRef = A1AC148F200A36C500912E0E /* Blockchain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -34,6 +35,7 @@
 		A1356E51200B9C970050CE89 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		A1356E53200BA6290050CE89 /* Cryptography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
 		A1356E5A200BAC230050CE89 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		A1356E5B200BDE2C0050CE89 /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		A1AC148C200A36C500912E0E /* Blockchain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blockchain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1AC148F200A36C500912E0E /* Blockchain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Blockchain.h; sourceTree = "<group>"; };
 		A1AC1490200A36C500912E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				A1356E4F200B879B0050CE89 /* Transaction.swift */,
 				A1356E51200B9C970050CE89 /* Wallet.swift */,
 				A1356E53200BA6290050CE89 /* Cryptography.swift */,
+				A1356E5B200BDE2C0050CE89 /* DataConvertible.swift */,
 				A1AC1490200A36C500912E0E /* Info.plist */,
 			);
 			path = Blockchain;
@@ -227,6 +230,7 @@
 				A1356E4E200A3A560050CE89 /* Blockchain.swift in Sources */,
 				A1356E50200B879B0050CE89 /* Transaction.swift in Sources */,
 				A1356E54200BA6290050CE89 /* Cryptography.swift in Sources */,
+				A1356E5C200BDE2C0050CE89 /* DataConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
