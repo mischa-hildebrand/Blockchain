@@ -11,6 +11,7 @@
 		A1356E4E200A3A560050CE89 /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E4D200A3A560050CE89 /* Blockchain.swift */; };
 		A1356E50200B879B0050CE89 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E4F200B879B0050CE89 /* Transaction.swift */; };
 		A1356E52200B9C970050CE89 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E51200B9C970050CE89 /* Wallet.swift */; };
+		A1356E54200BA6290050CE89 /* Cryptography.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1356E53200BA6290050CE89 /* Cryptography.swift */; };
 		A1AC1496200A36C500912E0E /* Blockchain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1AC148C200A36C500912E0E /* Blockchain.framework */; };
 		A1AC149B200A36C500912E0E /* BlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AC149A200A36C500912E0E /* BlockchainTests.swift */; };
 		A1AC149D200A36C500912E0E /* Blockchain.h in Headers */ = {isa = PBXBuildFile; fileRef = A1AC148F200A36C500912E0E /* Blockchain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -31,6 +32,8 @@
 		A1356E4D200A3A560050CE89 /* Blockchain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockchain.swift; sourceTree = "<group>"; };
 		A1356E4F200B879B0050CE89 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		A1356E51200B9C970050CE89 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		A1356E53200BA6290050CE89 /* Cryptography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cryptography.swift; sourceTree = "<group>"; };
+		A1356E5A200BAC230050CE89 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		A1AC148C200A36C500912E0E /* Blockchain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Blockchain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1AC148F200A36C500912E0E /* Blockchain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Blockchain.h; sourceTree = "<group>"; };
 		A1AC1490200A36C500912E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,9 +61,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1356E58200BABF30050CE89 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				A1356E5A200BAC230050CE89 /* module.modulemap */,
+			);
+			path = CommonCrypto;
+			sourceTree = "<group>";
+		};
 		A1AC1482200A36C500912E0E = {
 			isa = PBXGroup;
 			children = (
+				A1356E58200BABF30050CE89 /* CommonCrypto */,
 				A1AC148E200A36C500912E0E /* Blockchain */,
 				A1AC1499200A36C500912E0E /* BlockchainTests */,
 				A1AC148D200A36C500912E0E /* Products */,
@@ -84,6 +96,7 @@
 				A1356E4D200A3A560050CE89 /* Blockchain.swift */,
 				A1356E4F200B879B0050CE89 /* Transaction.swift */,
 				A1356E51200B9C970050CE89 /* Wallet.swift */,
+				A1356E53200BA6290050CE89 /* Cryptography.swift */,
 				A1AC1490200A36C500912E0E /* Info.plist */,
 			);
 			path = Blockchain;
@@ -213,6 +226,7 @@
 				A1356E4C200A38900050CE89 /* Block.swift in Sources */,
 				A1356E4E200A3A560050CE89 /* Blockchain.swift in Sources */,
 				A1356E50200B879B0050CE89 /* Transaction.swift in Sources */,
+				A1356E54200BA6290050CE89 /* Cryptography.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +365,7 @@
 		A1AC14A1200A36C500912E0E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -358,12 +373,15 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/CommonCrypto";
 				INFOPLIST_FILE = Blockchain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mischa.Blockchain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CommonCrypto";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -373,6 +391,7 @@
 		A1AC14A2200A36C500912E0E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -380,12 +399,15 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/CommonCrypto";
 				INFOPLIST_FILE = Blockchain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mischa.Blockchain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CommonCrypto";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

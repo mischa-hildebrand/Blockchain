@@ -1,0 +1,14 @@
+//
+//  module.modulemap
+//  Blockchain
+//
+//  Created by Mischa (Privat) on 1/14/18.
+//  Copyright © 2018 Mischa Hildebrand. All rights reserved.
+//
+
+// Defines a Swift module `CommonCrypto` from the corresponding Objective-C framework.
+// This definition is needed in order to import the `CommonCrypto` framework with a normal Swift `import` statement.
+module CommonCrypto [system] {
+    header "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator11.2.sdk/usr/include/CommonCrypto/CommonHMAC.h"
+    export *
+}
