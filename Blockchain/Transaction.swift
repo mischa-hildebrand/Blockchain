@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A `Transaction` transfers a certain amount of money
+/// A `Transaction` represents the transfer of a certain amount of money
 /// from the sender's wallet to the receiver's wallet.
 struct Transaction {
     
