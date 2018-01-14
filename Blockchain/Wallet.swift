@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// An entity to which money can be assigned.
+/// An entity that can send and receive money.
 public class Wallet {
     
     public enum Error: Swift.Error {

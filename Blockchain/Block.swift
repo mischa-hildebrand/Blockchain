@@ -18,6 +18,10 @@ public struct Block<T: DataConvertible> {
     /// Computed from all data included in this block, except the hash itself.
     public let hash: Int
     
+}
+
+extension Block {
+    
     /// Initializer.
     /// Creates a new block with the contents provided, computes the hash for these contents
     /// and stores it in the block's `hash` property.
