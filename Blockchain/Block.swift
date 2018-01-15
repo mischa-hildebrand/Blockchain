@@ -15,7 +15,7 @@ public struct Block<T: DataConvertible> {
     public let content: Content
     
     /// The hash value for this block.
-    /// Computed from all data included in this block, except the hash itself.
+    /// Computed from the block's `content`.
     public let hash: Int
     
 }
