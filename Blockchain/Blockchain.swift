@@ -11,7 +11,7 @@ import Foundation
 public struct Blockchain<T: DataConvertible> {
     
     /// The chain of blocks.
-    var blocks: [Block<T>] = []
+    public private(set) var blocks: [Block<T>] = []
     
     /// Checks if a block in the chain is valid at the given index
     /// by validating that the block's hash is correct and its previous hash
