@@ -62,7 +62,7 @@ public struct Blockchain<T: DataConvertible> {
     /// Validates if the whole blockchain is valid
     /// by validating every block in the chain.
     public var isValid: Bool {
-        for (index, _) in blocks.enumerated() {
+        for index in blocks.indices {
             guard isBlockValid(at: index) else {
                 return false
             }
