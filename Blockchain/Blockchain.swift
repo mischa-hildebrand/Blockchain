@@ -20,19 +20,53 @@ public struct Blockchain<T: DataConvertible> {
     /// - Parameter index: The index of the block in the chain to be validated.
     /// - Returns: `true` if the block is valid, else `false`.
     public func isBlockValid(at index: Int) -> Bool {
+        
+        // Validate that the block's hash is correct.
+        guard validateHash(forBlockAt: index) else {
+            return false
+        }
+        
+        // Validate that the block's previous hash is equal to the previous block's hash.
+        if index > 0 { // except for the genesis block at index 0
+            guard validatePreviousHash(forBlockAt: index) else {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    /// Validates that the block's hash is correct.
+    ///
+    /// - Parameter index: The index of the block in the chain whose hash is to be validated.
+    /// - Returns: `true` if the block is valid, else `false`.
+    private func validateHash(forBlockAt index: Int) -> Bool {
+        let currentBlock = blocks[index]
+        return currentBlock.hash == currentBlock.content.hashValue
+    }
+    
+    /// Validates that the block's previous hash is equal to the previous block's hash.
+    ///
+    /// - Parameter index: The index of the block in the chain whose previous hash is to be validated.
+    /// - Returns: `true` if the block's previous hash is equal to the previous block's hash, else `false`.
+    private func validatePreviousHash(forBlockAt index: Int) -> Bool {
+        guard index > 0 else {
+            fatalError("There is no previous block!")
+        }
         let previousBlock = blocks[index - 1]
         let currentBlock = blocks[index]
         
-        // Validate that the block's previous hash is equal to the previous block's hash.
-        guard currentBlock.content.previousHash == previousBlock.hash else {
-            return false
+        return currentBlock.content.previousHash == previousBlock.hash
+    }
+    
+    /// Validates if the whole blockchain is valid
+    /// by validating every block in the chain.
+    public var isValid: Bool {
+        for (index, _) in blocks.enumerated() {
+            guard isBlockValid(at: index) else {
+                return false
+            }
         }
-        
-        // Validate that the block's hash is correct.
-        guard currentBlock.hash == currentBlock.content.hashValue else {
-            return false
-        }
-        
         return true
     }
     
