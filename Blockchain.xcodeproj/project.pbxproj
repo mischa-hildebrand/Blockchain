@@ -17,6 +17,7 @@
 		A1AC1496200A36C500912E0E /* Blockchain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1AC148C200A36C500912E0E /* Blockchain.framework */; };
 		A1AC149B200A36C500912E0E /* BlockchainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AC149A200A36C500912E0E /* BlockchainTests.swift */; };
 		A1AC149D200A36C500912E0E /* Blockchain.h in Headers */ = {isa = PBXBuildFile; fileRef = A1AC148F200A36C500912E0E /* Blockchain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1ADDDB52049B220005F1C39 /* Money.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1ADDDB42049B220005F1C39 /* Money.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		A1AC1495200A36C500912E0E /* BlockchainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlockchainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1AC149A200A36C500912E0E /* BlockchainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainTests.swift; sourceTree = "<group>"; };
 		A1AC149C200A36C500912E0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1ADDDB42049B220005F1C39 /* Money.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				A1AC148F200A36C500912E0E /* Blockchain.h */,
 				A164E3F52035FC6E00571BF8 /* Core */,
 				A1356E4F200B879B0050CE89 /* Transaction.swift */,
+				A1ADDDB42049B220005F1C39 /* Money.swift */,
 				A1356E53200BA6290050CE89 /* Cryptography.swift */,
 				A1356E5B200BDE2C0050CE89 /* DataConvertible.swift */,
 				A1AC1490200A36C500912E0E /* Info.plist */,
@@ -242,6 +245,7 @@
 				A1356E4E200A3A560050CE89 /* Blockchain.swift in Sources */,
 				A1356E50200B879B0050CE89 /* Transaction.swift in Sources */,
 				A1356E54200BA6290050CE89 /* Cryptography.swift in Sources */,
+				A1ADDDB52049B220005F1C39 /* Money.swift in Sources */,
 				A1356E5C200BDE2C0050CE89 /* DataConvertible.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
