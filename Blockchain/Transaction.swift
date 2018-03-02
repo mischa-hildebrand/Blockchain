@@ -23,17 +23,33 @@ struct Transaction {
     
 }
 
-protocol Money {
-    var value: Float { get }
-    var currency: Currency { get }
+extension Transaction: DataConvertible {
+    
+    static func ==(lhs: Transaction, rhs: Transaction) -> Bool {
+        return lhs.sender == rhs.sender && lhs.receiver == rhs.receiver && lhs.amount == rhs.amount
+    }
+    
 }
 
-protocol Currency {
-    var symbol: Character { get }
-    var abbreviation: String { get }
+struct Money: Equatable {
+    let value: Float
+    let currency: Currency
+    
+    static func ==(lhs: Money, rhs: Money) -> Bool {
+        return (lhs.value == rhs.value) && (lhs.currency == rhs.currency)
+    }
 }
 
-struct Crypto€: Currency {
-    var symbol: Character = "€"
-    var abbreviation: String = "KEU"
+struct Currency: Equatable {
+    /// The name of the currency, e.g. "Euro" or "Dollar".
+    let name: String
+    /// The symbol of the currency, e.g. "€" or "$".
+    let symbol: Character
+    /// The abbreviation for the currency, e.g. "EUR" or "USD".
+    let abbreviation: String
+    
+    static func ==(lhs: Currency, rhs: Currency) -> Bool {
+        return lhs.abbreviation == rhs.abbreviation
+    }
 }
+

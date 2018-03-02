@@ -15,7 +15,7 @@ public protocol DataConvertible: Equatable {
     
 }
 
-extension Date: DataConvertible {
+extension DataConvertible {
     
     public var data: Data {
         return dataRepresentation(of: self)
@@ -23,15 +23,11 @@ extension Date: DataConvertible {
     
 }
 
-extension Int: DataConvertible {
-    
-    public var data: Data {
-        return dataRepresentation(of: self)
-    }
-    
-}
+extension Date: DataConvertible {}
 
-func dataRepresentation<T>(of source: T) -> Data {
+extension Int: DataConvertible {}
+
+private func dataRepresentation<T>(of source: T) -> Data {
     var sourceCopy = source
     return Data(bytes: &sourceCopy, count: MemoryLayout<T>.size)
 }
