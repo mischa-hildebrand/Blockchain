@@ -27,6 +27,8 @@ extension Date: DataConvertible {}
 
 extension Int: DataConvertible {}
 
+extension String: DataConvertible {}
+
 private func dataRepresentation<T>(of source: T) -> Data {
     var sourceCopy = source
     return Data(bytes: &sourceCopy, count: MemoryLayout<T>.size)
