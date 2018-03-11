@@ -6,24 +6,35 @@
 //  Copyright © 2018 Mischa Hildebrand. All rights reserved.
 //
 
-struct Money: Equatable {
-    let value: Float
-    let currency: Currency
+public struct Money: Equatable {
+    public let value: Float
+    public let currency: Currency
     
-    static func ==(lhs: Money, rhs: Money) -> Bool {
+    public init(value: Float, currency: Currency) {
+        self.value = value
+        self.currency = currency
+    }
+    
+    public static func ==(lhs: Money, rhs: Money) -> Bool {
         return (lhs.value == rhs.value) && (lhs.currency == rhs.currency)
     }
 }
 
-struct Currency: Equatable {
+public struct Currency: Equatable {
     /// The name of the currency, e.g. "Euro" or "Dollar".
-    let name: String
+    public let name: String
     /// The symbol of the currency, e.g. "€" or "$".
-    let symbol: Character
+    public let symbol: Character
     /// The abbreviation for the currency, e.g. "EUR" or "USD".
-    let abbreviation: String
+    public let abbreviation: String
     
-    static func ==(lhs: Currency, rhs: Currency) -> Bool {
+    public init(name: String, symbol: Character, abbreviation: String) {
+        self.name = name
+        self.symbol = symbol
+        self.abbreviation = abbreviation
+    }
+    
+    public static func ==(lhs: Currency, rhs: Currency) -> Bool {
         return lhs.abbreviation == rhs.abbreviation
     }
 }

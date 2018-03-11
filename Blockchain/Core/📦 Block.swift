@@ -20,13 +20,20 @@ public struct Block<T: DataConvertible> {
     
     /// The hash value for this block.
     /// Computed from the block's `content`.
-    public var hash: Int
+    public var hash: Int {
+        return content.hashValue
+    }
     
-}
-
-// MARK: - Initialization
-
-extension Block {
+    // MARK: - Initialization
+    
+    /// Initializer.
+    /// Creates a new block with the contents provided, computes the hash for these contents
+    /// and stores it in the block's `hash` property.
+    ///
+    /// - Parameter content: The block contents from which the hash is generated.
+    public init(content: BlockContent<T>) {
+        self.content = content
+    }
     
     /// Initializer.
     /// Creates a new block with the contents provided, computes the hash for these contents
@@ -37,7 +44,7 @@ extension Block {
     ///   - previousHash: The previous block's hash value.
     ///   - nonce: A value that can be changed in order to change the hash of this block without changing the block's payload.
     ///   - timestamp: Specifies the point in time when this block was created. (Default value = _now_)
-    public init(payload: T, previousHash: Int, nonce: Int, timestamp: Date = Date()) {
+    public init(payload: T, previousHash: Int = 0, nonce: Int = 0, timestamp: Date = Date()) {
         self.init(content:
             BlockContent(
                 timestamp: timestamp,
@@ -46,16 +53,6 @@ extension Block {
                 payload: payload
             )
         )
-    }
-    
-    /// Initializer.
-    /// Creates a new block with the contents provided, computes the hash for these contents
-    /// and stores it in the block's `hash` property.
-    ///
-    /// - Parameter content: The block contents from which the hash is generated.
-    public init(content: BlockContent<T>) {
-        self.content = content
-        self.hash = content.hashValue
     }
     
 }
@@ -116,7 +113,7 @@ extension BlockContent: DataConvertible {
 extension Hash {
     
     func beginsWith(numberOfLeadingZeroes: Int) -> Bool {
-        return numberOfLeadingZeroes >= leadingZeroBitCount
+        return leadingZeroBitCount >= numberOfLeadingZeroes
     }
     
 }
