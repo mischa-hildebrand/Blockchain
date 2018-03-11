@@ -16,7 +16,7 @@ public typealias Hash = Int
 public struct Block<T: DataConvertible> {
     
     /// The information stored in a block, on which the hash is computed.
-    public var content: Content
+    public var content: BlockContent<T>
     
     /// The hash value for this block.
     /// Computed from the block's `content`.
@@ -39,7 +39,7 @@ extension Block {
     ///   - timestamp: Specifies the point in time when this block was created. (Default value = _now_)
     public init(payload: T, previousHash: Int, nonce: Int, timestamp: Date = Date()) {
         self.init(content:
-            Content(
+            BlockContent(
                 timestamp: timestamp,
                 previousHash: previousHash,
                 nonce: nonce,
@@ -53,38 +53,34 @@ extension Block {
     /// and stores it in the block's `hash` property.
     ///
     /// - Parameter content: The block contents from which the hash is generated.
-    public init(content: Content) {
+    public init(content: BlockContent<T>) {
         self.content = content
         self.hash = content.hashValue
     }
     
 }
 
-// MARK: - Content
+// MARK: - Block Content
 
-public extension Block {
+/// Encapsulates all contents of a block, except its hash value.
+public struct BlockContent<T: DataConvertible> {
     
-    /// Encapsulates all contents of a block, except its hash value.
-    public struct Content {
-        
-        /// Specifies the point in time when this block was created.
-        public let timestamp: Date
-        
-        /// The previous block's hash value.
-        public let previousHash: Int
-        
-        /// A value that can be changed in order to change the hash of this block
-        /// without changing the block's payload.
-        public var nonce: Int
-        
-        /// Contains the actual data of the block.
-        /// (Might be transactions, smart contracts or anything you want.)
-        public let payload: T
-    }
+    /// Specifies the point in time when this block was created.
+    public let timestamp: Date
     
+    /// The previous block's hash value.
+    public let previousHash: Int
+    
+    /// A value that can be changed in order to change the hash of this block
+    /// without changing the block's payload.
+    public var nonce: Int
+    
+    /// Contains the actual data of the block.
+    /// (Might be transactions, smart contracts or anything you want.)
+    public let payload: T
 }
 
-extension Block.Content: Hashable {
+extension BlockContent: Hashable {
     
     public var hashValue: Hash {
         let hashData = data.hash // The hash as `Data`.
@@ -92,7 +88,7 @@ extension Block.Content: Hashable {
         return hashValue
     }
     
-    public static func ==(lhs: Block<T>.Content, rhs: Block<T>.Content) -> Bool {
+    public static func ==(lhs: BlockContent, rhs: BlockContent) -> Bool {
         return lhs.timestamp == rhs.timestamp &&
             lhs.previousHash == rhs.previousHash &&
             lhs.payload == rhs.payload &&
@@ -102,7 +98,7 @@ extension Block.Content: Hashable {
     
 }
 
-extension Block.Content: DataConvertible {
+extension BlockContent: DataConvertible {
     
     public var data: Data {
         var data = Data()
