@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias Address = SecKey
+
 /// An entity that can send and receive money.
 public class Wallet {
     

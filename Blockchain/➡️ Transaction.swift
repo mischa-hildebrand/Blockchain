@@ -12,11 +12,11 @@ import Foundation
 /// from the sender's wallet to the receiver's wallet.
 struct Transaction {
     
-    // The wallet of the person or entity sending money.
-    let sender: Wallet
+    // The address of the person or entity sending money.
+    let sender: Address
     
-    // The wallet of the person or entity receiving money.
-    let receiver: Wallet
+    // The address of the person or entity receiving money.
+    let receiver: Address
     
     // The amount of money being transferred.
     let amount: Money
