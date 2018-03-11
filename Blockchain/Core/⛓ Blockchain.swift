@@ -13,10 +13,14 @@ public struct Blockchain<T: DataConvertible> {
     /// The chain of blocks.
     public private(set) var blocks: [Block<T>] = []
     
+    // MARK: - Adding blocks
+    
     /// Adds a `block` to the chain of blocks.
     public mutating func add(_ block: Block<T>) {
         blocks.append(block)
     }
+    
+    // MARK: - Validation
     
     /// Checks if a block in the chain is valid at the given index
     /// by validating that the block's hash is correct and its previous hash

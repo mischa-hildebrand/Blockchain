@@ -10,6 +10,8 @@ import Foundation
 
 public typealias Hash = Int
 
+// MARK: - Block Definition
+
 /// A block that can be attached to a blockchain.
 public struct Block<T: DataConvertible> {
     
@@ -21,6 +23,8 @@ public struct Block<T: DataConvertible> {
     public var hash: Int
     
 }
+
+// MARK: - Initialization
 
 extension Block {
     
@@ -55,6 +59,8 @@ extension Block {
     }
     
 }
+
+// MARK: - Content
 
 public extension Block {
     
@@ -108,6 +114,8 @@ extension Block.Content: DataConvertible {
     }
     
 }
+
+// MARK: - Convenience Functions
 
 extension Hash {
     
