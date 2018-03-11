@@ -8,15 +8,17 @@
 
 import Foundation
 
+public typealias Hash = Int
+
 /// A block that can be attached to a blockchain.
 public struct Block<T: DataConvertible> {
     
     /// The information stored in a block, on which the hash is computed.
-    public let content: Content
+    public var content: Content
     
     /// The hash value for this block.
     /// Computed from the block's `content`.
-    public let hash: Int
+    public var hash: Int
     
 }
 
@@ -67,7 +69,7 @@ public extension Block {
         
         /// A value that can be changed in order to change the hash of this block
         /// without changing the block's payload.
-        public let nonce: Int
+        public var nonce: Int
         
         /// Contains the actual data of the block.
         /// (Might be transactions, smart contracts or anything you want.)
@@ -78,7 +80,7 @@ public extension Block {
 
 extension Block.Content: Hashable {
     
-    public var hashValue: Int {
+    public var hashValue: Hash {
         let hashData = data.hash // The hash as `Data`.
         let hashValue: Int = hashData.withUnsafeBytes { $0.pointee } // The hash as `Int`.
         return hashValue
@@ -103,6 +105,14 @@ extension Block.Content: DataConvertible {
         data.append(payload.data)
         data.append(nonce.data)
         return data
+    }
+    
+}
+
+extension Hash {
+    
+    func beginsWith(numberOfLeadingZeroes: Int) -> Bool {
+        return numberOfLeadingZeroes >= leadingZeroBitCount
     }
     
 }
