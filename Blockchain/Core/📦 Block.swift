@@ -56,9 +56,17 @@ public struct Block<T: DataConvertible> {
     }
 }
 
+extension Block: CustomStringConvertible {
+    
+    public var description: String {
+        return content.description + "\n" + "hash: \(hash)"
+    }
+
+}
+
 // MARK: - Block Content
 
-/// Encapsulates all contents of a block, except its hash value.
+/// Encapsulates all contents of a block over which its hash value is computed.
 public struct BlockContent<T: DataConvertible> {
     
     /// Specifies the point in time when this block was created.
@@ -107,6 +115,24 @@ extension BlockContent: DataConvertible {
         }
         data.append(nonce.data)
         return data
+    }
+    
+}
+
+extension BlockContent: CustomStringConvertible {
+    
+    public var description: String {
+        let payloadDescription: String
+        if let payload = payload {
+            payloadDescription = "\(payload)"
+        } else {
+            payloadDescription = "[empty payload]"
+        }
+        
+        return "timestamp: \(timestamp)\n" +
+            "previousHash: \(previousHash)\n" +
+            "nonce: \(nonce)" +
+            "payload: \(payloadDescription)"
     }
     
 }
