@@ -44,7 +44,7 @@ public struct Block<T: DataConvertible> {
     ///   - previousHash: The previous block's hash value.
     ///   - nonce: A value that can be changed in order to change the hash of this block without changing the block's payload.
     ///   - timestamp: Specifies the point in time when this block was created. (Default value = _now_)
-    public init(payload: T, previousHash: Int = 0, nonce: Int = 0, timestamp: Date = Date()) {
+    public init(payload: T?, previousHash: Int = 0, nonce: Int = 0, timestamp: Date = Date()) {
         self.init(content:
             BlockContent(
                 timestamp: timestamp,
@@ -54,7 +54,6 @@ public struct Block<T: DataConvertible> {
             )
         )
     }
-    
 }
 
 // MARK: - Block Content
@@ -74,7 +73,7 @@ public struct BlockContent<T: DataConvertible> {
     
     /// Contains the actual data of the block.
     /// (Might be transactions, smart contracts or anything you want.)
-    public let payload: T
+    public let payload: T?
 }
 
 extension BlockContent: Hashable {
@@ -90,7 +89,6 @@ extension BlockContent: Hashable {
             lhs.previousHash == rhs.previousHash &&
             lhs.payload == rhs.payload &&
             lhs.nonce == rhs.nonce
-        
     }
     
 }
@@ -101,7 +99,12 @@ extension BlockContent: DataConvertible {
         var data = Data()
         data.append(timestamp.data)
         data.append(previousHash.data)
-        data.append(payload.data)
+        // FIXME: The optional type should be `DataConvertible` so we don't need to unwrap it here.
+        //        This will be possible in Swift 4.2 which introduces conditional conformances:
+        //        https://github.com/apple/swift-evolution/blob/master/proposals/0143-conditional-conformances.md
+        if let payload = payload {
+            data.append(payload.data)
+        }
         data.append(nonce.data)
         return data
     }

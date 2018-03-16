@@ -10,9 +10,12 @@ import Foundation
 
 public struct Blockchain<T: DataConvertible> {
     
+    /// The first block in the chain. Doesn't contain any payload.
+    public let genesisBlock = Block<T>(payload: nil)
+    
     /// The chain of blocks.
     public private(set) var blocks: [Block<T>] = []
-    
+
     // MARK: - Adding blocks
     
     /// Adds a `block` to the chain of blocks.
@@ -20,7 +23,22 @@ public struct Blockchain<T: DataConvertible> {
         blocks.append(block)
     }
     
+    public init() {
+        blocks.append(genesisBlock)
+    }
+    
     // MARK: - Validation
+    
+    /// Validates if the whole blockchain is valid
+    /// by validating every block in the chain.
+    public var isValid: Bool {
+        for index in blocks.indices {
+            guard isBlockValid(at: index) else {
+                return false
+            }
+        }
+        return true
+    }
     
     /// Checks if a block in the chain is valid at the given index
     /// by validating that the block's hash is correct and its previous hash
@@ -66,17 +84,6 @@ public struct Blockchain<T: DataConvertible> {
         let currentBlock = blocks[index]
         
         return currentBlock.content.previousHash == previousBlock.hash
-    }
-    
-    /// Validates if the whole blockchain is valid
-    /// by validating every block in the chain.
-    public var isValid: Bool {
-        for index in blocks.indices {
-            guard isBlockValid(at: index) else {
-                return false
-            }
-        }
-        return true
     }
     
 }
