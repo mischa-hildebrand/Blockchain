@@ -19,7 +19,7 @@ public class Miner<T: DataConvertible> {
     let hashCondition: HashCondition
     
     /// The miner's personal copy of the blockchain on which she / he operates.
-    var blockchain = Blockchain<T>()
+    public private(set) var blockchain = Blockchain<T>()
     
     /// The hash condition that is used by default if no condition is specified.
     public static var defaultHashCondition: HashCondition {
@@ -37,8 +37,15 @@ public class Miner<T: DataConvertible> {
     /// and adds it to the miner's blockchain.
     ///
     /// - Parameter block: The block to be mined.
-    public func mine(block: inout Block<T>) {
+    public func mineBlock(withPayload payload: T) {
+        guard let previousHash = blockchain.blocks.last?.hash else {
+            return
+        }
+        let now = Date()
+        var block = Block(payload: payload, previousHash: previousHash, nonce: 0, timestamp: now)
         while !block.hash.satisfies(hashCondition) {
+            print("current nonce: \(block.content.nonce)")
+            print("current hash: \(String(block.hash, radix: 2))")
             block.content.nonce += 1
         }
         blockchain.add(block)
