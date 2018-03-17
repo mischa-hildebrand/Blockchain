@@ -91,7 +91,7 @@ public struct Blockchain<T: DataConvertible> {
 extension Blockchain: CustomStringConvertible {
     
     public var description: String {
-        return blocks.map { $0.description }.joined(separator: "\n")
+        return blocks.map { $0.description }.joined(separator: "\n  |\n  |\n  |\n  |\n")
     }
     
 }

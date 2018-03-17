@@ -129,10 +129,12 @@ extension BlockContent: CustomStringConvertible {
             payloadDescription = "[empty payload]"
         }
         
-        return "timestamp: \(timestamp)\n" +
-            "previousHash: \(previousHash)\n" +
-            "nonce: \(nonce)" +
-            "payload: \(payloadDescription)"
+        return "Block {\n" +
+            "    timestamp: \(timestamp)\n" +
+            "    previousHash: \(previousHash)\n" +
+            "    nonce: \(nonce)\n" +
+            "    payload: \(payloadDescription)\n" +
+            " }"
     }
     
 }
