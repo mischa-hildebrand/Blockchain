@@ -24,7 +24,7 @@ public struct Blockchain<T: DataConvertible> {
     }
     
     public init() {
-        blocks.append(genesisBlock)
+        add(genesisBlock)
     }
     
     // MARK: - Validation
