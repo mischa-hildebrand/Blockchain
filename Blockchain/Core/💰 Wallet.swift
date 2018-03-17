@@ -11,45 +11,15 @@ import Foundation
 /// An entity that can send and receive money.
 public class Wallet {
     
-    public enum Error: Swift.Error {
-        case privateKeyGenerationFailure
-        case publicKeyGenerationFailure
-    }
-    
     private let privateKey: SecKey
     public let publicKey: SecKey
     
     public init() {
-        guard let keyPair = try? Wallet.createKeyPair() else {
+        guard let keyPair = try? Cryptography.createKeyPair() else {
             fatalError("Wallet could not be initialized because the key generation failed.")
         }
-        self.publicKey = keyPair.publicKey
-        self.privateKey = keyPair.privateKey
-    }
-    
-    private static func createKeyPair() throws -> (privateKey: SecKey, publicKey: SecKey) {
-        let tag = "wallet.key".data(using: .utf8)!
-        
-        let privateKeyAttributes: [String: Any] = [
-            kSecAttrIsPermanent as String:      false,
-            kSecAttrApplicationTag as String:   tag
-        ]
-        
-        let parameters: [String: Any] = [
-            kSecAttrKeyType as String:          kSecAttrKeyTypeRSA,
-            kSecAttrKeySizeInBits as String:    2048,
-            kSecPrivateKeyAttrs as String:      privateKeyAttributes
-        ]
-        
-        guard let privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, nil) else {
-            throw Error.privateKeyGenerationFailure
-        }
-        
-        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
-            throw Error.publicKeyGenerationFailure
-        }
-        
-        return (privateKey, publicKey)
+        publicKey = keyPair.publicKey
+        privateKey = keyPair.privateKey
     }
     
 }

@@ -21,3 +21,42 @@ extension Data {
     }
     
 }
+
+/// Encapsulates key generation functions.
+struct Cryptography {
+    
+    public enum Error: Swift.Error {
+        case privateKeyGenerationFailure
+        case publicKeyGenerationFailure
+    }
+    
+    /// Creates a matching pair of a private and a public key.
+    ///
+    /// - Returns: A tuple of a matching private and public key.
+    /// - Throws: A `Cryptography.Error` if the key generation failed.
+    static func createKeyPair() throws -> (privateKey: SecKey, publicKey: SecKey) {
+        let tag = "wallet.key".data(using: .utf8)!
+        
+        let privateKeyAttributes: [String: Any] = [
+            kSecAttrIsPermanent as String:      false,
+            kSecAttrApplicationTag as String:   tag
+        ]
+        
+        let parameters: [String: Any] = [
+            kSecAttrKeyType as String:          kSecAttrKeyTypeRSA,
+            kSecAttrKeySizeInBits as String:    2048,
+            kSecPrivateKeyAttrs as String:      privateKeyAttributes
+        ]
+        
+        guard let privateKey = SecKeyCreateRandomKey(parameters as CFDictionary, nil) else {
+            throw Error.privateKeyGenerationFailure
+        }
+        
+        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+            throw Error.publicKeyGenerationFailure
+        }
+        
+        return (privateKey, publicKey)
+    }
+    
+}

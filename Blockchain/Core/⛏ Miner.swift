@@ -43,7 +43,7 @@ public class Miner<T: DataConvertible> {
         var block = Block(payload: payload, previousHash: previousHash, nonce: 0, timestamp: now)
         while !block.hash.satisfies(hashCondition) {
             print("current nonce: \(block.content.nonce)")
-            print("current hash: \(String(block.hash, radix: 2))")
+            print("current hash: \(String(block.hash, radix: 16))")
             block.content.nonce += 1
         }
         blockchain.add(block)
