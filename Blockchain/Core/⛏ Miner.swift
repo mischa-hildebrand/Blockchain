@@ -38,9 +38,7 @@ public class Miner<T: DataConvertible> {
     ///
     /// - Parameter block: The block to be mined.
     public func mineBlock(withPayload payload: T) {
-        guard let previousHash = blockchain.blocks.last?.hash else {
-            return
-        }
+        let previousHash = blockchain.last.hash
         let now = Date()
         var block = Block(payload: payload, previousHash: previousHash, nonce: 0, timestamp: now)
         while !block.hash.satisfies(hashCondition) {

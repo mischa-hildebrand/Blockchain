@@ -10,21 +10,29 @@ import Foundation
 
 public struct Blockchain<T: DataConvertible> {
     
+    // MARK: - Data storage properties
+    
     /// The first block in the chain. Doesn't contain any payload.
-    public let genesisBlock = Block<T>(payload: nil)
+    private let genesisBlock = Block<T>(payload: nil)
     
     /// The chain of blocks.
-    public private(set) var blocks: [Block<T>] = []
+    private var blocks: [Block<T>] = []
+    
+    // MARK: - Init
+    
+    public init() {
+        add(genesisBlock)
+    }
 
-    // MARK: - Adding blocks
+    // MARK: - Accessing and modifying blocks
     
     /// Adds a `block` to the chain of blocks.
     public mutating func add(_ block: Block<T>) {
         blocks.append(block)
     }
     
-    public init() {
-        add(genesisBlock)
+    public subscript(index: Int) -> Block<T> {
+        return blocks[index]
     }
     
     // MARK: - Validation
@@ -87,6 +95,33 @@ public struct Blockchain<T: DataConvertible> {
     }
     
 }
+
+// MARK: - Collection
+
+extension Blockchain: Collection {
+    
+    public func index(after i: Int) -> Int {
+        return i + 1
+    }
+    
+    public var startIndex: Int {
+        return 0
+    }
+    
+    public var endIndex: Int {
+        return blocks.count
+    }
+    
+    /// The last block in the chain.
+    public var last: Block<T> {
+        // We can force-unwrap here because we know the `blocks` array is never empty
+        // and always contains the genesis block.
+        return blocks.last!
+    }
+    
+}
+
+// MARK: - CustomStringConvertible
 
 extension Blockchain: CustomStringConvertible {
     
