@@ -35,7 +35,11 @@ public struct Blockchain<T: DataConvertible> {
         return blocks[index]
     }
     
-    // MARK: - Validation
+}
+
+// MARK: - Validation
+
+extension Blockchain {
     
     /// Validates if the whole blockchain is valid
     /// by validating every block in the chain.
