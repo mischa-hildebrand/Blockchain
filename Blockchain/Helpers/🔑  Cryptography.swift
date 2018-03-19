@@ -12,8 +12,8 @@ import CommonCrypto
 extension Data {
     
     /// The SHA256 hash value of the data.
-    var hash: Data {
-        var hash = [UInt8](repeating: 0,  count: Int(CC_SHA256_DIGEST_LENGTH))
+    var hash: Hash {
+        var hash = [Byte](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         withUnsafeBytes {
             _ = CC_SHA256($0, CC_LONG(count), &hash)
         }

@@ -81,7 +81,7 @@ extension Blockchain {
     /// - Returns: `true` if the block is valid, else `false`.
     private func validateHash(forBlockAt index: Int) -> Bool {
         let currentBlock = blocks[index]
-        return currentBlock.hash == currentBlock.content.hashValue
+        return currentBlock.hash == currentBlock.content.hash
     }
     
     /// Validates that the block's previous hash is equal to the previous block's hash.
