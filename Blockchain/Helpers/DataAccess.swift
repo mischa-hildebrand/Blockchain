@@ -48,7 +48,7 @@ extension Byte {
         }
         // e.g. nibble = 0x00001111
         let nibble: Data.Element = UInt8(HexDigit.largestValue)
-        // e.g. nibble = 0x00001111 or 0x11110000
+        // e.g. bitmask = 0x00001111 or 0x11110000
         let bitmask = nibble << (index * HexDigit.bitWidth)
         let sum = self & bitmask
         let shiftedSum = sum >> index
