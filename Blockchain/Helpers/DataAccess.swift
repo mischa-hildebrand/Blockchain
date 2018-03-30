@@ -14,8 +14,8 @@ struct HexDigit {
     static var largestValue: Int {
         let bitWidth = Float(self.bitWidth)
         let two = Float(2)
-        let squaredBitWidth = pow(bitWidth, two)
-        return Int(squaredBitWidth - 1)
+        let bitCombinationsCount = pow(two, bitWidth)
+        return Int(bitCombinationsCount - 1)
     }
 }
 
