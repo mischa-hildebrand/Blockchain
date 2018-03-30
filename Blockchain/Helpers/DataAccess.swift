@@ -41,17 +41,24 @@ extension Byte {
     /// - Parameter index: The position of the hex digit within the hex digit string.
     /// - Returns: The value of the hex digit as an integer.
     func hexDigit(at index: Int) -> Int {
-        guard index * HexDigit.bitWidth < Byte.bitWidth else {
+        let maxIndex = Byte.bitWidth / HexDigit.bitWidth - 1
+        guard index <= maxIndex else {
             fatalError("Index out of bounds! Tried to access a hex digit at an index " +
                 "that's beyond the limit of this byte. " +
                 "(A byte consists of \(Byte.bitWidth / HexDigit.bitWidth) hex digits.")
         }
+        
         // e.g. nibble = 0x00001111
         let nibble: Data.Element = UInt8(HexDigit.largestValue)
+        // the number of times we have to shift the nibble "1111" to the left
+        let nibbleShiftCount = maxIndex - index
+        // the number of bits by which we shift
+        let shiftBits = nibbleShiftCount * HexDigit.bitWidth
         // e.g. bitmask = 0x00001111 or 0x11110000
-        let bitmask = nibble << (index * HexDigit.bitWidth)
+        let bitmask = nibble << shiftBits
         let sum = self & bitmask
-        let shiftedSum = sum >> index
+        // shift it back
+        let shiftedSum = sum >> shiftBits
         return Int(shiftedSum)
     }
     
@@ -70,7 +77,7 @@ extension Data {
             fatalError("Index out of bounds! Tried to access the byte at index \(index) " +
                 "but this data instance has only \(totalByteSize) bytes.")
         }
-        let byteSize = Data.Element.bitWidth
+        let byteSize = Element.bitWidth
         let byteIndex = index / byteSize
         let bitIndex = index % byteSize
         let byte = self[byteIndex]
